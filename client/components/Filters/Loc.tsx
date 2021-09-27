@@ -21,6 +21,18 @@ const Loc = ({ loc, offset }: { loc: JobLocation; offset: Number }) => {
         const newObj = {...s};
         // @ts-ignore
         newObj[location.type] = s[location.type].filter((x: any) => x !== location.name);
+        let childs = location.children;
+        while(childs?.length) {
+          let newChilds = [] as Array<JobLocation>;
+          for (const loc of childs) {
+            // @ts-ignore
+            if (loc.children?.length) newChilds = [...newChilds, ...loc.children];
+            console.log({loc, newChilds});
+            // @ts-ignore
+            newObj[loc.type] = newObj[loc.type].filter((x: any) => x !== loc.name);
+          }
+          childs = newChilds;
+        }
         return newObj;
       })
     }
