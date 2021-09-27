@@ -1,0 +1,117 @@
+.filters {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.selected {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-weight: bold;
+
+  i {
+    margin: 0.2rem 0 0 0.5rem;
+  }
+}
+
+.options {
+  position: absolute;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  top: 2.5rem;
+  width: 100%;
+  -webkit-box-shadow: 4px 3px 6px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: 4px 3px 6px 0px rgba(0, 0, 0, 0.46);
+}
+
+.page-filter .option {
+  padding: 0.4rem;
+}
+
+.option {
+  width: 100%;
+
+  label {
+    width: 100%;
+    height: 100%;
+    margin: 0.4rem,
+  }
+
+  label:hover {
+    cursor: pointer;
+  }
+
+  input {
+    margin: 0.4rem;
+    margin-right: 0.2rem;
+  }
+}
+
+.option:hover {
+  background: rgba(100,100,100,0.1);
+}
+
+.shadow {
+  opacity: 0;
+  z-index: -1;
+}
+
+.func-filter {
+  max-height: 20rem;
+  min-width: 20rem;
+  overflow-y: scroll;
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.func-children {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  div {
+    display: flex;
+    align-items: baseline;
+  }
+
+  input {
+    margin-left: 2rem;
+  }
+}
+
+.func-parent {
+  display: flex;
+  align-items: center;
+}
+
+.func {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 !important;
+  padding-right: 0.5rem;
+}
+
+@media screen and (max-width: 400px) {
+  .func-filter {
+    max-width: 17rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .filters {
+    flex-direction: column;
+  }
+}
