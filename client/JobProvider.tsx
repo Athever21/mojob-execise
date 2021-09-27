@@ -12,6 +12,12 @@ const JobProvider = ({ children }: any) => {
   const [loadMore, setLoadMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const [funcFilters, setFuncFilters] = useState([] as Array<String>);
+  const [locationFilters, setLocationFilters] = useState({
+    country_long_name: [],
+    administrative_area_level_1: [],
+    administrative_area_level_2: [],
+    postal_town: [],
+  } as any);
 
   const fetchNews = async (more: Boolean) => {
     const pageFilters =
@@ -19,6 +25,12 @@ const JobProvider = ({ children }: any) => {
         ? "?use_pagination=False"
         : `?use_pagination=True&page=${page}&page_size=${pageSize}`;
     const posFunc = `&position_functions=${funcFilters.join(",")}`;
+    let loc = "";
+    for (const [key, value] of Object.entries(locationFilters)) {
+      console.log(key,value)
+      // @ts-ignore
+      loc += `&${key}=${value.join(",")}`;
+    }
 
     if (!more) setJobs([]);
     setLoadMore(false);
@@ -26,7 +38,9 @@ const JobProvider = ({ children }: any) => {
     try {
       setLoading(true);
       // @ts-ignore
-      const { data } = await axios.get(`${API_URL}/listings/${pageFilters}${posFunc}`);
+      console.log(`${API_URL}/listings/${pageFilters}${posFunc}${loc}`);
+      // @ts-ignore
+      const { data } = await axios.get(`${API_URL}/listings/${pageFilters}${posFunc}${loc}`);
       if (data.next) setLoadMore(true);
       const jobs = data.results ? data.results : data;
 
@@ -47,7 +61,7 @@ const JobProvider = ({ children }: any) => {
     (async () => {
       await fetchNews(false);
     })();
-  }, [pageSize, funcFilters]);
+  }, [pageSize, funcFilters, locationFilters]);
 
   return (
     <JobContext.Provider
@@ -60,7 +74,8 @@ const JobProvider = ({ children }: any) => {
         loading,
         addFuncFilter,
         removeFuncFilter,
-        funcFilters
+        funcFilters,
+        setLocationFilters
       }}
     >
       {children}

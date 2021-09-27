@@ -3,11 +3,13 @@ import "@/styles/Filters.scss";
 
 import PageFilter from "./PageFilter";
 import FunctionFilter from "./FunctionFilter";
+import Location from "./Location";
 
 const Filters = () => {
   return (
     <div className="filters">
       <FunctionFilter />
+      <Location />
       <PageFilter />
     </div>
   );

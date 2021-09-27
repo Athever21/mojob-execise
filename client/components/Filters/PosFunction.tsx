@@ -13,7 +13,7 @@ const PosFunction = ({ func }: { func: PositionFunction }) => {
       addFuncFilter(pos.id.toString());
     } else {
       if (parent) {
-        // @ts-ignore ja pierdole
+        // @ts-ignore
         for (const child of pos.children) {
           removeFuncFilter(child.id.toString());
         }
